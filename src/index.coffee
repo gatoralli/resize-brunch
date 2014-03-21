@@ -1,8 +1,7 @@
-info = require('netpbm').info
-convert = require('netpbm').convert
-exec = require('child_process').exec
-fs = require('fs')
-path = require('path')
+gm = require "gm"
+exec = require("child_process").exec
+fs = require "fs"
+path = require "path"
 
 typeIsArray = Array.isArray || ( value ) -> return {}.toString.call( value ) is '[object Array]'
 
@@ -62,11 +61,7 @@ module.exports = class Resize
     recursiveFetch directory
 
   createResized: (imagePath, src, options) ->
-    convertOptions =
-      height: options.height
-      width: options.width
-
-    convert src, imagePath, convertOptions, (error) ->
+    gm(src).resize(options.width, options.height).write imagePath, (error) ->
       console.error error if error
 
   resizedExists: (imagePath) ->
