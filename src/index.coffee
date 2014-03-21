@@ -1,4 +1,4 @@
-gm = require "gm"
+gm = require("gm").subClass imageMagick: true
 exec = require("child_process").exec
 fs = require "fs"
 path = require "path"
